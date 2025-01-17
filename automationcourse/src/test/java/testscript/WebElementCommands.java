@@ -1,49 +1,121 @@
 package testscript;
 
-import java.util.jar.Attributes.Name;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class WebElementCommands extends Base {
-	public void locators() {
-		WebElement showmessage = driver.findElement(By.id("button-one"));//id
-		WebElement sampleClassName = driver.findElement(By.className("clearfix"));// classname 
-		WebElement nameSample = driver.findElement(By.name("viewport"));
-		WebElement linkTextSample = driver.findElement(By.linkText("Checkbox Demo"));
-		WebElement partialLinkText = driver.findElement(By.partialLinkText("Checkbox"));
-		//WebElement sampleClassName1 = driver.findElement(By.className("container page"));compound class name not permitted
-		WebElement sampleClassName2 = driver.findElement(By.className("mb-sec"));
-		WebElement sampleClassName3 = driver.findElement(By.className("top-logo"));
-		//WebElement sampleClassName4 = driver.findElement(By.className("list-group list-group-flush"));compound class name not permitted
-		WebElement nameSample1 = driver.findElement(By.name("description"));
-		WebElement nameSample2 = driver.findElement(By.name("keywords"));
-		WebElement namesample3 = driver.findElement(By.name("author"));
-		//WebElement linkTextSample1 = driver.findElement(By.linkText("images/favicon.ico")); no such element
-		//WebElement linkTextSample2 = driver.findElement(By.linkText("https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"));
-		//WebElement linkTextSample3 = driver.findElement(By.linkText("css/main.css"));
-		WebElement showMessage1 = driver.findElement(By.id("button-two"));
-		//WebElement showMessage2 = driver.findElement(By.id(""));
-		WebElement className =driver.findElement(By.cssSelector(".clearfix"));// css selector
-		WebElement classNameTag = driver.findElement(By.cssSelector("section.clearfix"));// with tag name and classname
-		WebElement showmessageTagName = driver.findElement(By.cssSelector("button#button-one"));//id with tagname
-		WebElement atrributeValue = driver.findElement(By.cssSelector("Link[href='css/main.css']"));
-		WebElement tagNamesample = driver.findElement(By.tagName("div"));
-		WebElement samplXpath = driver.findElement(By.xpath("//[button@id='button-one']"));
-		WebElement sampleXpath1 = driver.findElement(By.xpath("//button[@id='button-two']"));
+public class WebElementCommands extends Base{
+	public void verifySingleInputField() {
+		String enterValue ="Hello";
+		String textConcat ="Your Message :";
+		String expectedValue = textConcat.concat(" ").concat( enterValue);
+		WebElement singleInputTextField = driver.findElement(By.xpath("//input[@id='single-input-field']"));
+		singleInputTextField.sendKeys(enterValue);
+		String actualValue = singleInputTextField.getAttribute("value");
+		WebElement showMessageButton = driver.findElement(By.xpath("//button[@id='button-one']"));
+		showMessageButton.click();
+		WebElement showMessageColon = driver.findElement(By.xpath("//div[@id='message-one']"));
+		String yourmessage = showMessageColon.getText();
+	
+		if (expectedValue.equals(yourmessage))
+		{
+			System.out.println("Test Passed");
+		}
+		else
+		{
+			System.out.println("Test Failed");
+		}
 		
+			}
+	public void verifyTwoInputField()
+	{
+		int a = 20;
+		int b =30;
+		int expectedTotal = a+b;
+		WebElement inputATextbox= driver.findElement(By.xpath("//input[@id='value-a']"));
+		inputATextbox.sendKeys(""+a);
+		WebElement inputBTextbox= driver.findElement(By.xpath("//input[@id='value-b']"));
+		inputBTextbox.sendKeys(""+b);
+		WebElement getTotalButton = driver.findElement(By.xpath("//button[@id='button-two']"));
+		getTotalButton.click();
+		WebElement totalText =driver.findElement(By.xpath("//div[@id='message-two']"));
+		String total =totalText.getText();
+		int actualTotal = Integer.parseInt(total.substring(14));
+		if(expectedTotal==actualTotal)
+		{
+			System.out.println("Test Passed");
+		}
+		else
+		{
+			System.out.println("Test Failed");	
+		}
+
+
+	}
 		
+	public void verifybackgroundcolourofShowMesssageButton() {
+		String expectedcolour= "rgba(0, 123, 255, 1)";
+		WebElement showMessageButton = driver.findElement(By.xpath("//button[@id='button-one']"));
+		String backgroundColor = showMessageButton.getCssValue("background-color");
+		if (backgroundColor.equals(expectedcolour))
+		{
+			System.out.println("Test passed");
+		}
+		else
+	    {
+		System.out.println("Test Failed");
+	}
+	}
+	public void verifyfontweightofShowMessageButton() {
+		String expectedfontweight ="400";
+		WebElement showMessageButton = driver.findElement(By.xpath("//button[@id='button-one']"));
+		String fontweight =showMessageButton.getCssValue("font-weight");
 		
+		if (fontweight.equals(expectedfontweight))
+		{
+			System.out.println("Test passed");
+		}
+		else
+	    {
+		System.out.println("Test Failed");
+	}
+	}
+	public void webElementCommands() {
+		String expectedcolour= "rgba(0, 123, 255, 1)";
+		String expectedBorderColor = "rgba(0, 123, 255, 1)";
+		String expectedfontcolor = "rgba(255, 255, 255, 1)";
+		String expectedfontweight ="400";
+		WebElement singleInputTextField = driver.findElement(By.xpath("//input[@id='single-input-field']"));
+		singleInputTextField.sendKeys("Hello");
+		singleInputTextField.clear();// to clear value given in text field
+		WebElement showMessageButton = driver.findElement(By.xpath("//button[@id='button-one']"));
+		showMessageButton.click();
+		boolean isShowMessageButtonEnabled = showMessageButton.isEnabled();//if this is true button is enabled else disabled
+		boolean isShowMessageDisplayed = showMessageButton.isDisplayed();//check if button is displayed
+		WebElement showMessageColon = driver.findElement(By.xpath("//div[@id='message-one']"));
+		String yourmessage = showMessageColon.getText();
 		
+		String attribute = showMessageButton.getAttribute("type");
+		String attribute1 = showMessageButton.getAttribute("class");
+		String attribute2 = showMessageButton.getAttribute("id");
+		String attribute3 = showMessageButton.getAttribute("fdprocessedid");
+		String tagname = showMessageButton.getTagName();//to get tag name of element
+		
+		String backgroundcolor = showMessageButton.getCssValue("background-color");
+		String bordercolor =showMessageButton.getCssValue("border-color");
+		String fontcolor = showMessageButton.getCssValue("color");
+		String fontweight =showMessageButton.getCssValue("font-weight");
+		String borderradius = showMessageButton.getCssValue("border-radius");
 	}
 
 	public static void main(String[] args) {
 		WebElementCommands webelementcommands = new WebElementCommands();
 		webelementcommands.initialiseBrowser();
-		webelementcommands.locators();
+		webelementcommands.verifySingleInputField();
+		webelementcommands.verifyTwoInputField();
+		webelementcommands.webElementCommands();
+		webelementcommands.verifybackgroundcolourofShowMesssageButton();
+		webelementcommands.verifyfontweightofShowMessageButton();
 		webelementcommands.browserQuit();
-		
-
 	}
 
 }
