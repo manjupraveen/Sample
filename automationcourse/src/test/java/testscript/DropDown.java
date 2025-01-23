@@ -3,6 +3,7 @@ package testscript;
 import org.openqa.selenium.By;
 import java.util.List;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 public class DropDown extends Base {
@@ -33,12 +34,16 @@ public class DropDown extends Base {
 		
 		
 	}
-
+	
+	
+	
+	
 	public static void main(String[] args) {
 		DropDown dropdown = new DropDown();
 		dropdown.initialiseBrowser();
-		//dropdown.verifySelectInputDropDown();
 		dropdown.verifyLanguageDropdown();
+		dropdown.verifySelectInputDropDown();
+		
 		dropdown.browserQuit();
 
 	}
